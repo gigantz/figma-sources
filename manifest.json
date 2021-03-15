@@ -1,0 +1,7 @@
+{
+  "name": "File Images",
+  "id": "file-images",
+  "api": "1.0.0",
+  "main": "dist/code.js",
+  "ui": "dist/ui.html"
+}
