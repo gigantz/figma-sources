@@ -7,16 +7,13 @@ module.exports = (env, argv) => ({
 
   module: {
     rules: [
-      {
-        test: /\.(js|jsx)$/,
-        exclude: /node_modules/,
-        use: "babel-loader",
-      },
-      {
-        test: /\.tsx?$/,
-        use: "ts-loader",
-        exclude: /node_modules/,
-      },
+      // {
+      //   test: /\.(js|jsx)$/,
+      //   exclude: /node_modules/,
+      //   use: "babel-loader",
+      // },
+      { test: /\.tsx?$/, use: "ts-loader", exclude: /node_modules/ },
+
       {
         test: /\.css$/,
         loader: [{ loader: "style-loader" }, { loader: "css-loader" }],
@@ -33,12 +30,10 @@ module.exports = (env, argv) => ({
     ],
   },
   entry: {
-    ui: "./src/ui/index.tsx",
-    code: "./src/sandbox/code.ts",
+    ui: path.resolve(__dirname, "./src/ui/index.tsx"),
+    code: path.resolve(__dirname, "./src/sandbox/code.ts"),
   },
-  resolve: {
-    extensions: [".js", ".jsx", ".tsx", ".ts"],
-  },
+  resolve: { extensions: [".tsx", ".ts", ".jsx", ".js", ".esm"] },
   output: {
     filename: "[name].js",
     path: path.resolve(__dirname, "dist"),

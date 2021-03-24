@@ -1,6 +1,5 @@
-// @ts-nocheck
 figma.showUI(__html__, {
-  width: 316,
+  width: 326,
   height: 550,
 });
 
@@ -15,7 +14,9 @@ function getImageHashFromFills(fills, node) {
       if (!imagePositions[fill.imageHash]) imagePositions[fill.imageHash] = [];
       imagePositions[fill.imageHash].push({ id: node.id, pageId });
 
+      // @ts-ignore
       if (!images.includes(fill.imageHash)) {
+        // @ts-ignore
         images.push(fill.imageHash);
       }
     }
@@ -54,10 +55,12 @@ figma.ui.onmessage = (msg) => {
   if (msg.type === "image-position") {
     const page = figma.getNodeById(msg.data.pageId);
     const node = figma.getNodeById(msg.data.id);
-    figma.currentPage = page;
-    page.selection = [node];
-    figma.viewport.scrollAndZoomIntoView([node]);
+    if (page && node) {
+      // @ts-ignore
+      figma.currentPage = page;
+      // @ts-ignore
+      page.selection = [node];
+      figma.viewport.scrollAndZoomIntoView([node]);
+    }
   }
-
-  // figma.closePlugin();
 };

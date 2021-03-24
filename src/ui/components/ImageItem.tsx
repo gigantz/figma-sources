@@ -1,8 +1,8 @@
-import React, { memo, useMemo } from "react";
+import React, { memo, useCallback, useMemo, useState } from "react";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import useClipboard from "react-use-clipboard";
 
-import { generateImgSrcUrl } from "../helpers";
+import { generateImgSrcUrl, generateSecuredUrl } from "../helpers";
 import { ExternalIcon } from "../icons/External";
 import { CopyIcon } from "../icons/Copy";
 
@@ -21,6 +21,7 @@ type Props = {
 
 export const ImageItem = memo(({ fileKey, hash, positions }: Props) => {
   const url = useMemo(() => generateImgSrcUrl(fileKey, hash), [fileKey, hash]);
+  const securedUrl = useMemo(() => generateSecuredUrl(url), [url]);
 
   const [isCopied, setCopied] = useClipboard(url, {
     successDuration: 1000,
@@ -60,7 +61,7 @@ export const ImageItem = memo(({ fileKey, hash, positions }: Props) => {
       <div className="image-item__info">
         <span onClick={onPosition}>{hash && hash.slice(0, 6)}</span>
         <div className="image-item__buttons">
-          <a href={url} target="_blank" className="icon-link">
+          <a href={securedUrl} target="_blank" className="icon-link">
             <ExternalIcon />
           </a>
           <span className="line" />

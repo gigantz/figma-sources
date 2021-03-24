@@ -1,6 +1,6 @@
 {
-  "name": "File Images",
-  "id": "file-images",
+  "name": "Sources",
+  "id": "955149600865163713",
   "api": "1.0.0",
   "main": "dist/code.js",
   "ui": "dist/ui.html"
