@@ -1,4 +1,4 @@
-const linkPattern = /https\:\/\/www\.figma\.com\/file\/.*/gi;
+const linkPattern = /https\:\/\/www\.figma\.com\/(file|design|board)\/.*/gi;
 
 export function checkSharedLink(url: string) {
   if (!url || !url.trim()) return false;
@@ -7,8 +7,18 @@ export function checkSharedLink(url: string) {
 
 export function getFileKey(sharedLink: string) {
   const splittedLink = sharedLink.split("/");
-  const fileIndex = splittedLink.indexOf("file");
+  let fileIndex;
+
+  if (splittedLink.indexOf("file") !== -1) {
+    fileIndex = splittedLink.indexOf("file");
+  } else if (splittedLink.indexOf("design") !== -1) {
+    fileIndex = splittedLink.indexOf("design");
+  } else {
+    fileIndex = splittedLink.indexOf("board");
+  }
+
   const fileKey = splittedLink[fileIndex + 1];
+
   if (fileIndex > -1) {
     return fileKey;
   }

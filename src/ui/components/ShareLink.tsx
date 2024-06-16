@@ -26,6 +26,7 @@ export const ShareLink = ({ onSetFileKey }: Props) => {
   const onClick = () => {
     if (isValid) {
       const fileKey = getFileKey(value);
+      console.log({ fileKey });
       onSetFileKey(fileKey || "");
     }
   };
